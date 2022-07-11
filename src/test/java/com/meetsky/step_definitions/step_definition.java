@@ -12,11 +12,12 @@ import org.junit.Assert;
 
 
 public class step_definition {
+
     LoginPage loginPage = new LoginPage();
     MainPage mainPage = new MainPage();
 
-    @Given("user navigates to login page")
-    public void user_navigates_to_login_page() {
+    @Given("user goes to login page")
+    public void user_goes_to_login_page() {
         Driver.getDriver().get(ConfigurationReader.getProperty("web.url"));
     }
 
@@ -38,7 +39,7 @@ public class step_definition {
     @Then("user should be navigate to main page")
     public void user_should_be_navigate_to_main_page() {
         Assert.assertTrue(mainPage.avatarButton.isDisplayed());
-        Assert.assertFalse(loginPage.usernameBox.isDisplayed());
+        //Assert.assertFalse(loginPage.usernameBox.isDisplayed());
     }
 
     @When("user enters invalid username to username box")
@@ -55,13 +56,13 @@ public class step_definition {
     @Then("user should see Wrong username or password")
     public void user_should_see_wrong_username_or_password() {
         String message =loginPage.wrongUsernamePasswordMessage.getText();
-        Assert.assertEquals( "Kullanıcı adı ya da parola hatalı.", message);
+        Assert.assertEquals( "Wrong username or password.", message);
     }
 
     @Then("user should see please fill out this filed message in password box")
     public void user_should_see_please_fill_out_this_filed_message_in_password_box() {
         String message= loginPage.passwordBox.getAttribute("validationMessage");
-        Assert.assertEquals("Lütfen bu alanı doldurun.",message);
+        Assert.assertEquals("Please fill out this field.",message);
     }
 
     @When("user enters invalid password to password box")
@@ -72,7 +73,7 @@ public class step_definition {
     @Then("user should see please fill out this filed message in the username box")
     public void user_should_see_please_fill_out_this_filed_message_in_the_username_box() {
         String message= loginPage.usernameBox.getAttribute("validationMessage");
-        Assert.assertEquals("Lütfen bu alanı doldurun.",message);
+        Assert.assertEquals("Please fill out this field.",message);
     }
 
     @Then("user can see the password in a form of dots by default")
@@ -101,39 +102,12 @@ public class step_definition {
     @Then("user can see valid placeholders on username")
     public void user_can_see_valid_placeholders_on_username() {
         String placeholder = loginPage.usernameBox.getAttribute("placeholder");
-        Assert.assertEquals("Kullanıcı adı ya da e-posta", placeholder);
+        Assert.assertEquals("Username or email", placeholder);
     }
 
     @Then("user can see valid placeholders on password")
     public void user_can_see_valid_placeholders_on_password() {
         String placeholder = loginPage.passwordBox.getAttribute("placeholder");
-        Assert.assertEquals("Parola", placeholder);
+        Assert.assertEquals("Password", placeholder);
     }
-
-//@Given("user is on login page")
-//public void user_is_on_login_page() {
-//    // Write code here that turns the phrase above into concrete actions
-//    Driver.getDriver().get(ConfigurationReader.getProperty("web.url"));
-//}
-//    @Given("user enters valid username")
-//    public void user_enters_valid_username() {
-//
-//        LoginPage.userNameInputBox.sendKeys(ConfigurationReader.getProperty("username"));
-//
-//    }
-//    @Given("user enters valid password")
-//    public void user_enters_valid_password() {
-//
-//        LoginPage.passwordInputBox.sendKeys(ConfigurationReader.getProperty("password"));
-//    }
-//    @Given("user clicks on login button")
-//    public void user_clicks_on_login_button() {
-//        LoginPage.loginButton.click();
-//    }
-//    @Then("user is able to login and lands on homepage")
-//    public void user_is_able_to_login_and_lands_on_homepage() {
-//        System.out.println("User logged in successfully");
-//    }
-
 }
-
